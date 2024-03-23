@@ -19,17 +19,17 @@ const query = gql`
 const StockDetails = () => {
   const { symbol } = useLocalSearchParams();
 
-  const {data, loading, error} = useQuery(query, {variables: { symbol }})
+  const { data, loading, error } = useQuery(query, { variables: { symbol } });
 
   if (loading) {
-    return <ActivityIndicator />
+    return <ActivityIndicator />;
   }
 
   if (error) {
     return <Text>Stock with symbol {symbol} could not be found</Text>;
   }
 
-  const stock = data.quote
+  const stock = data.quote;
 
   return (
     <View style={{ padding: 10 }}>
@@ -37,11 +37,9 @@ const StockDetails = () => {
         options={{ title: stock.symbol, headerBackTitleVisible: false }}
       />
       <StockListItem stock={stock} />
-      <Graph />
+      <Graph symbol={stock.symbol} />
     </View>
   );
 };
 
 export default StockDetails;
-
-const styles = StyleSheet.create({});
